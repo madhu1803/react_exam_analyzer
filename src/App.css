@@ -16,16 +16,34 @@ body {
   width: 100%;
 }
 
-/* blue components */
-.txt-blue {
+/* ------------------------------------------------- GENERAL COMPONENTS ---------------------------------------------------- */
+
+/*  components */
+.txt-dblue {
   color: #3e5eab !important;
 }
-.btn-blue {
+.txt-blue {
+  color: #5580e9 !important;
+}
+.txt-grey {
+  color: #c1c8e4 !important;
+}
+
+.bg-grey {
+  background-color: #c1c8e4 !important;
+}
+
+.bg-dblue {
+  background-color: #3e5eab !important;
+}
+
+.bg-blue {
   background-color: #5580e9 !important;
 }
 
-.txt-grey {
-  color: #c1c8e4 !important;
+/* navbar */
+.navbar a {
+  color: white !important;
 }
 
 /* input component */
@@ -43,6 +61,7 @@ input::placeholder {
   color: #3e5eab !important;
 }
 
+/* -------------------------------------------------- LOGIN PAGE ----------------------------------------------------------- */
 /* login container */
 .login-container,
 .login-container .row,
@@ -84,4 +103,16 @@ input::placeholder {
   .login-container .login-right-container .main-container .field-container {
     margin-top: 100px;
   }
+}
+
+/* -------------------------------------------------- HOME PAGE ----------------------------------------------------------- */
+
+.home-container {
+  width: 100%;
+  height: 100%;
+  background-color: #f4f7fe;
+}
+
+.home-card {
+  border: none !important;
 }
