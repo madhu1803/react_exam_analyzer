@@ -1,10 +1,9 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
 html,
 body {
   margin: 0;
   padding: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
+  font-family: "Montserrat", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   height: 100%;
@@ -16,15 +15,31 @@ body {
   width: 100%;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+/* blue components */
+.txt-blue {
+  color: #3e5eab !important;
+}
+.btn-blue {
+  background-color: #5580e9 !important;
+}
+
+/* input component */
+.input-container input {
+  border-bottom: 1px solid #c1c8e4 !important;
+  outline: 0;
+  border-width: 0 0 4px;
+}
+
+input::placeholder {
+  color: #c1c8e4 !important;
+}
+
+.input-container .form-label {
+  color: #3e5eab !important;
 }
 
 /* login container */
-
 .login-container,
-.login-container .box-container,
 .login-container .row,
 .login-container .login-left-container,
 .login-container .login-right-container {
@@ -32,28 +47,36 @@ code {
   height: 100%;
 }
 
-.login-container {
-  background-color: #dfdde0;
-}
-
-.login-container .box-container {
-  padding: 80px;
-}
-
-.login-container .col-lg-6,
-.login-container .col-lg-6 {
-  padding-left: 0 !important;
-  padding-right: 0 !important;
-  margin: 0 !important;
-}
-
+/* login left container  */
 .login-container .login-left-container {
-  background: url("https://images.unsplash.com/photo-1522441815192-d9f04eb0615c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=564&q=80");
-  background-repeat: no-repeat;
-  padding: 100px;
+  background-color: #3e5eab;
 }
 
+.login-container .login-left-container .left-text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 300px;
+}
+
+.login-container .login-left-container h1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 10px;
+}
+
+/* login right container */
 .login-container .login-right-container {
   background-color: white;
+}
+
+.login-container .login-right-container .main-container {
   padding: 50px;
+}
+
+@media only screen and (min-width: 992px) {
+  .login-container .login-right-container .main-container .field-container {
+    margin-top: 150px;
+  }
 }
