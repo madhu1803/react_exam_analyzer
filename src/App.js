@@ -7,7 +7,7 @@ import {
   Redirect,
 } from "react-router-dom";
 import { AuthenticatedRoute, NonAuthenticatedRoute } from "./helpers/Routes";
-import { Home, Login, Update, Page404 } from "./pages/index";
+import { Home, Login, Update, QuestionPaperView, Page404 } from "./pages/index";
 
 export default class App extends Component {
   render() {
@@ -20,6 +20,10 @@ export default class App extends Component {
           <NonAuthenticatedRoute path="/login" component={Login} />
           <AuthenticatedRoute path="/home" component={Home} />
           <AuthenticatedRoute path="/teacher/update" component={Update} />
+          <AuthenticatedRoute
+            path="/questionpaper/view"
+            component={QuestionPaperView}
+          />
           <Route component={Page404} />
         </Switch>
       </Router>
