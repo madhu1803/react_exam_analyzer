@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Navibar, Homecard } from "../components/index";
+import { Navibar, HomeCard } from "../components/index";
 export default class Home extends Component {
   render() {
     return (
@@ -8,19 +8,19 @@ export default class Home extends Component {
         <div className="container pt-5">
           <div className="row">
             <div className="col-lg-4">
-              <Homecard />
+              <HomeCard />
             </div>
             <div className="col-lg-4">
-              <Homecard />
+              <HomeCard />
             </div>
             <div className="col-lg-4">
-              <Homecard />
+              <HomeCard />
             </div>
             <div className="col-lg-6">
-              <Homecard />
+              <HomeCard />
             </div>
             <div className="col-lg-6">
-              <Homecard />
+              <HomeCard />
             </div>
           </div>
         </div>

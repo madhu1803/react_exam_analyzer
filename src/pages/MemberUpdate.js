@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Navibar, Input } from "../components/index";
 import { Card, Button } from "react-bootstrap";
-export default class Update extends Component {
+export default class MemberUpdate extends Component {
   render() {
     return (
       <div>

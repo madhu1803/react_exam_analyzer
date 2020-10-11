@@ -28,7 +28,7 @@ export const NonAuthenticatedRoute = ({ component: Component, ...rest }) => (
       localStorage.getItem("auth_key") ? (
         <Redirect
           to={{
-            pathname: "/dashboard",
+            pathname: "/home",
             state: { from: props.location },
           }}
         />

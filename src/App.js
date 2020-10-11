@@ -7,7 +7,13 @@ import {
   Redirect,
 } from "react-router-dom";
 import { AuthenticatedRoute, NonAuthenticatedRoute } from "./helpers/Routes";
-import { Home, Login, Update, QuestionPaperView, Page404 } from "./pages/index";
+import {
+  Home,
+  Login,
+  MemberUpdate,
+  QuestionPaperView,
+  Page404,
+} from "./pages/index";
 
 export default class App extends Component {
   render() {
@@ -19,7 +25,7 @@ export default class App extends Component {
           <Redirect exact from="/" to="/login" />
           <NonAuthenticatedRoute path="/login" component={Login} />
           <AuthenticatedRoute path="/home" component={Home} />
-          <AuthenticatedRoute path="/teacher/update" component={Update} />
+          <AuthenticatedRoute path="/teacher/update" component={MemberUpdate} />
           <AuthenticatedRoute
             path="/questionpaper/view"
             component={QuestionPaperView}

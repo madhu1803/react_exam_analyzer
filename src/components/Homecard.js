@@ -1,7 +1,7 @@
 import React from "react";
 import { Card } from "react-bootstrap";
 
-export default function Homecard() {
+export default function HomeCard() {
   return (
     <Card className="shadow-lg p-3 mb-5 bg-white rounded home-card">
       <Card.Body>
