@@ -12,6 +12,7 @@ import {
   Login,
   MemberUpdate,
   QuestionPaperView,
+  MemberList,
   Page404,
 } from "./pages/index";
 
@@ -29,6 +30,10 @@ export default class App extends Component {
           <AuthenticatedRoute
             path="/questionpaper/view"
             component={QuestionPaperView}
+          />
+            <AuthenticatedRoute
+            path="/memberlist/view"
+            component={MemberList}
           />
           <Route component={Page404} />
         </Switch>
