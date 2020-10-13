@@ -5,6 +5,19 @@ import { Input } from "../components/index";
 import { Navbar } from "react-bootstrap";
 
 export default class Login extends Component {
+  state = {
+    email: "",
+    password: "",
+  };
+  handleChange = (e) => {
+    this.setState({ [e.target.name]: e.target.value });
+  };
+
+  submitHandler = () => {
+    alert("Submitted");
+    console.log(this.state.email, this.state.password);
+  
+  };
   render() {
     return (
       <div className="login-container text-capitalise">
@@ -33,9 +46,9 @@ export default class Login extends Component {
                   <RiLoginBoxLine className="txt-grey" />
                 </h1>
                 <h3 className="txt-blue">Login</h3>
-                <Input type="email" placeholder="ramu@gmail.com" name="Email" />
-                <Input type="password" placeholder="password" name="Password" />
-                <Button className="bg-blue btn-block mt-5">Login</Button>
+                <Input type="email" placeholder="ramu@gmail.com" name="email" value={this.state.email} change={(e) => this.handleChange(e)}/>
+                <Input type="password" placeholder="password" name="password" value={this.state.password} change={(e) => this.handleChange(e)}/>
+                <Button className="bg-blue btn-block mt-5" onClick={this.submitHandler}>Login</Button>
               </div>
             </div>
           </div>
