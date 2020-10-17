@@ -14,6 +14,7 @@ import {
   QuestionPaperView,
   MemberList,
   SubjectList,
+  ExamList,
   Page404,
 } from "./pages/index";
 import axios from 'axios'
@@ -56,6 +57,10 @@ export default class App extends Component {
            <AuthenticatedRoute
             path="/subjects"
             component={SubjectList}
+          />
+           <AuthenticatedRoute
+            path="/exams"
+            component={ExamList}
           />
           <Route component={Page404} />
         </Switch>

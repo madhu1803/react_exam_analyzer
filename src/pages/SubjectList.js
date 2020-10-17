@@ -20,8 +20,7 @@ export default class SubjectList extends Component {
           ...this.state,
           subjects: response.data,
         });
-        console.log(response.data);
-        console.log(this.state.subjects);
+       
       })
       .catch((error) => {
         console.log(error.response);
