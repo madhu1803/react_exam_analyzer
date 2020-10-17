@@ -19,21 +19,21 @@ import axios from 'axios'
 
 export default class App extends Component {
   
-  componentDidMount() {
-    axios({
-      method: "get",
-      url: "https://gprs-api.geopits.com/project/projects/",
-      headers: {
-        Authorization: `sessionid ${localStorage.getItem("auth_key")}`,
-      },
-    }).catch((error) => {
-      console.log(error);
-      localStorage.removeItem("auth_key");
-      if (window.location.pathname !== "/login") {
-        window.location.reload();
-      }
-    });
-  }
+  // componentDidMount() {
+  //   axios({
+  //     method: "get",
+  //     url: "https://gprs-api.geopits.com/project/projects/",
+  //     headers: {
+  //       Authorization: `sessionid ${localStorage.getItem("auth_key")}`,
+  //     },
+  //   }).catch((error) => {
+  //     console.log(error);
+  //     localStorage.removeItem("auth_key");
+  //     if (window.location.pathname !== "/login") {
+  //       window.location.reload();
+  //     }
+  //   });
+  // }
   render() {
     return (
       <Router>

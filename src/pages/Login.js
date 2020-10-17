@@ -17,20 +17,37 @@ export default class Login extends Component {
 
   submitHandler = () => {
     alert("Submitted");
-    axios.post('https://testing.ajaidanial.wtf/auth/get-auth-token/', {
-      username: this.state.username,
+    axios({
+      method: "post",
+      url: "https://testing.ajaidanial.wtf/auth/get-auth-token/",
+      data: {
+        username: this.state.username,
       password: this.state.password,
+      },
     })
-    .then(function (response) {
-      console.log(response.data);
-      localStorage.setItem('auth_key' ,response.data.token)
-      window.location.reload();
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
-  
+      .then((response) => {
+        if (response.status === 200) {
+          alert("success");
+          localStorage.setItem("auth_key", response.data.token);
+          window.location.reload();
+        } else {
+          alert("unhandled");
+        }
+      })
+      .catch((error) => {
+        if (error.response.status === 400 || error.response.status === 403) {
+          alert("error");
+          this.setState({
+            ...this.state,
+            errors: {
+             error:error.response.data.non_field_errors 
+            },
+          });
+          console.log(this.state.errors.error)
+        }
+      });
   };
+
   render() {
     return (
       <div className="login-container text-capitalise">
@@ -59,8 +76,8 @@ export default class Login extends Component {
                   <RiLoginBoxLine className="txt-grey" />
                 </h1>
                 <h3 className="txt-blue">Login</h3>
-                <Input type="text" placeholder="ramu@gmail.com" name="username" value={this.state.username} change={(e) => this.handleChange(e)}/>
-                <Input type="password" placeholder="password" name="password" value={this.state.password} change={(e) => this.handleChange(e)}/>
+                <Input type="text" placeholder="ramu@gmail.com" name="username" value={this.state.username} change={(e) => this.handleChange(e)} errors={this.state.errors.error}/>
+                <Input type="password" placeholder="password" name="password" value={this.state.password} change={(e) => this.handleChange(e)} errors={this.state.errors.error}/>
                 <Button className="bg-blue btn-block mt-5" onClick={this.submitHandler}>Login</Button>
               </div>
             </div>
