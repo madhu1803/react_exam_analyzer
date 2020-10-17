@@ -7,8 +7,9 @@ import axios from 'axios'
 
 export default class Login extends Component {
   state = {
-    email: "",
+    username: "",
     password: "",
+    errors:{},
   };
   handleChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
@@ -16,15 +17,14 @@ export default class Login extends Component {
 
   submitHandler = () => {
     alert("Submitted");
-    console.log(this.state.username, this.state.password);
     axios.post('https://testing.ajaidanial.wtf/auth/get-auth-token/', {
       username: this.state.username,
       password: this.state.password,
-      // headers: {'auth_key': '4e2a4557ffe3573f27e6547aa2fb5c4c393914cd'}
     })
     .then(function (response) {
-      console.log(response.data.token);
+      console.log(response.data);
       localStorage.setItem('auth_key' ,response.data.token)
+      window.location.reload();
     })
     .catch(function (error) {
       console.log(error);
