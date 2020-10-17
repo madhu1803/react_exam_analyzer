@@ -7,7 +7,7 @@ export default class Input extends Component {
 
     return (
       <div className="input-container mt-5">
-        <Form.Group controlId="formBasicEmail">
+        <Form.Group >
           <Form.Label>{name}</Form.Label>
           <Form.Control type={type} placeholder={placeholder} onChange={change} value={value} name={name}/>
         </Form.Group>

@@ -3,6 +3,7 @@ import { Button } from "react-bootstrap";
 import { RiBookOpenFill, RiLoginBoxLine } from "react-icons/ri";
 import { Input } from "../components/index";
 import { Navbar } from "react-bootstrap";
+import axios from 'axios'
 
 export default class Login extends Component {
   state = {
@@ -16,6 +17,17 @@ export default class Login extends Component {
   submitHandler = () => {
     alert("Submitted");
     console.log(this.state.email, this.state.password);
+    axios.post('https://testing.ajaidanial.wtf/auth/get-auth-token/', {
+      username: this.state.username,
+      password: this.state.password,
+      // headers: {'auth_key': '4e2a4557ffe3573f27e6547aa2fb5c4c393914cd'}
+    })
+    .then(function (response) {
+      console.log(response);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
   
   };
   render() {
@@ -41,7 +53,7 @@ export default class Login extends Component {
           {/* right container */}
           <div className="login-right-container col-lg-6">
             <div className="main-container">
-              <div class="field-container">
+              <div className="field-container">
                 <h1>
                   <RiLoginBoxLine className="txt-grey" />
                 </h1>
