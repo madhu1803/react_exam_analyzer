@@ -16,14 +16,15 @@ export default class Login extends Component {
 
   submitHandler = () => {
     alert("Submitted");
-    console.log(this.state.email, this.state.password);
+    console.log(this.state.username, this.state.password);
     axios.post('https://testing.ajaidanial.wtf/auth/get-auth-token/', {
       username: this.state.username,
       password: this.state.password,
       // headers: {'auth_key': '4e2a4557ffe3573f27e6547aa2fb5c4c393914cd'}
     })
     .then(function (response) {
-      console.log(response);
+      console.log(response.data.token);
+      localStorage.setItem('auth_key' ,response.data.token)
     })
     .catch(function (error) {
       console.log(error);
@@ -58,7 +59,7 @@ export default class Login extends Component {
                   <RiLoginBoxLine className="txt-grey" />
                 </h1>
                 <h3 className="txt-blue">Login</h3>
-                <Input type="email" placeholder="ramu@gmail.com" name="email" value={this.state.email} change={(e) => this.handleChange(e)}/>
+                <Input type="text" placeholder="ramu@gmail.com" name="username" value={this.state.username} change={(e) => this.handleChange(e)}/>
                 <Input type="password" placeholder="password" name="password" value={this.state.password} change={(e) => this.handleChange(e)}/>
                 <Button className="bg-blue btn-block mt-5" onClick={this.submitHandler}>Login</Button>
               </div>
