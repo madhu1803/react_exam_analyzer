@@ -44,6 +44,14 @@ export default class App extends Component {
         <Switch>
           <Redirect exact from="/" to="/login" />
           <NonAuthenticatedRoute path="/login" component={Login} />
+          <AuthenticatedRoute
+            path="/subjects"
+            component={SubjectList}
+          />
+           <AuthenticatedRoute
+            path="/exams"
+            component={ExamList}
+          />
           <AuthenticatedRoute path="/home" component={Home} />
           <AuthenticatedRoute path="/teacher/update" component={MemberUpdate} />
           <AuthenticatedRoute
@@ -53,14 +61,6 @@ export default class App extends Component {
             <AuthenticatedRoute
             path="/memberlist/view"
             component={MemberList}
-          />
-           <AuthenticatedRoute
-            path="/subjects"
-            component={SubjectList}
-          />
-           <AuthenticatedRoute
-            path="/exams"
-            component={ExamList}
           />
           <Route component={Page404} />
         </Switch>

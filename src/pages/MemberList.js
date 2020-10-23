@@ -1,8 +1,34 @@
 import React, { Component } from "react";
-import { Navibar, MemberTable } from "../components/index";
+import { Navibar } from "../components/index";
+import axios from 'axios'
 import { Table } from "react-bootstrap";
 
 export default class MemberList extends Component {
+
+  state = {
+    members: [],
+  };
+
+  componentDidMount() {
+    axios({
+      method: "get",
+      url: "https://testing.ajaidanial.wtf/auth/users/",
+      headers: {
+        Authorization: `Token ${localStorage.getItem("auth_key")}`,
+      },
+    })
+      .then((response) => {
+        this.setState({
+          ...this.state,
+          members: response.data,
+        });
+        console.log(this.state.members)
+        
+      })
+      .catch((error) => {
+        console.log(error.response);
+      });
+  }
   render() {
     return (
       <div>
@@ -12,29 +38,22 @@ export default class MemberList extends Component {
             <thead>
               <tr>
                 <th>#</th>
+                <th>Email</th>
                 <th>First Name</th>
                 <th>Last Name</th>
                 <th>Username</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>1</td>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-              </tr>
-              <tr>
-                <td>3</td>
-                <td colSpan="2">Larry the Bird</td>
-                <td>@twitter</td>
-              </tr>
+            {this.state.members.map((member) => (
+                    <tr>
+                      <td>{member.id}</td>
+                  <td>{member.email}</td>
+                  <td>{member.first_name}</td>
+                  <td>{member.last_name}</td>
+                  <td>{member.username}</td>
+                    </tr>
+                  ))}
             </tbody>
           </Table>
         </div>
