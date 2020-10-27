@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import { Table } from "react-bootstrap";
+import { Table, Button } from "react-bootstrap";
 import { Navibar } from "../components/index";
+import { AiFillFileAdd } from "react-icons/ai";
 import axios from "axios";
 
 export default class SubjectList extends Component {
@@ -20,7 +21,6 @@ export default class SubjectList extends Component {
           ...this.state,
           subjects: response.data,
         });
-       
       })
       .catch((error) => {
         console.log(error.response);
@@ -31,6 +31,10 @@ export default class SubjectList extends Component {
       <div>
         <Navibar />
         <div className="container mt-5">
+          <Button className="bg-dblue mb-4" href="/subject/create">
+            <AiFillFileAdd /> Add New
+          </Button>
+
           <Table striped bordered hover responsive>
             <thead>
               <tr>
@@ -42,7 +46,7 @@ export default class SubjectList extends Component {
               {this.state.subjects.map((subject) => (
                 <tr>
                   <td>{subject.id}</td>
-              <td>{subject.name}</td>
+                  <td>{subject.name}</td>
                 </tr>
               ))}
             </tbody>

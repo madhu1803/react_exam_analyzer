@@ -10,34 +10,18 @@ import { AuthenticatedRoute, NonAuthenticatedRoute } from "./helpers/Routes";
 import {
   Home,
   Login,
-  MemberUpdate,
   QuestionPaperView,
   MemberList,
+  MemberCreate,
   SubjectCreate,
   SubjectList,
   ExamList,
   Page404,
   ExamCreate,
 } from "./pages/index";
-import axios from 'axios'
+import axios from "axios";
 
 export default class App extends Component {
-  
-  // componentDidMount() {
-  //   axios({
-  //     method: "get",
-  //     url: "https://gprs-api.geopits.com/project/projects/",
-  //     headers: {
-  //       Authorization: `sessionid ${localStorage.getItem("auth_key")}`,
-  //     },
-  //   }).catch((error) => {
-  //     console.log(error);
-  //     localStorage.removeItem("auth_key");
-  //     if (window.location.pathname !== "/login") {
-  //       window.location.reload();
-  //     }
-  //   });
-  // }
   render() {
     return (
       <Router>
@@ -50,28 +34,16 @@ export default class App extends Component {
             path="/subject/create"
             component={SubjectCreate}
           />
-          <AuthenticatedRoute
-            path="/subjects"
-            component={SubjectList}
-          />
-           <AuthenticatedRoute
-            path="/exam/create"
-            component={ExamCreate}
-          />
-           <AuthenticatedRoute
-            path="/exams"
-            component={ExamList}
-          />
+          <AuthenticatedRoute path="/subjects" component={SubjectList} />
+          <AuthenticatedRoute path="/exam/create" component={ExamCreate} />
+          <AuthenticatedRoute path="/exams" component={ExamList} />
           <AuthenticatedRoute path="/home" component={Home} />
-          <AuthenticatedRoute path="/teacher/update" component={MemberUpdate} />
+          <AuthenticatedRoute path="/member/create" component={MemberCreate} />
           <AuthenticatedRoute
             path="/qpaper/view"
             component={QuestionPaperView}
           />
-            <AuthenticatedRoute
-            path="/memberlist/view"
-            component={MemberList}
-          />
+          <AuthenticatedRoute path="/memberlist/view" component={MemberList} />
           <Route component={Page404} />
         </Switch>
       </Router>
