@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { Table } from "react-bootstrap";
+import { Table,Button } from "react-bootstrap";
+import { RiAddCircleFill } from 'react-icons/ri';
 import { Navibar } from "../components/index";
 import axios from "axios";
 
@@ -32,6 +33,7 @@ export default class ExamList extends Component {
           <div>
             <Navibar />
             <div className="container mt-5">
+            <Button className="bg-dblue mb-4" href="/exam/create"><RiAddCircleFill/> Add New</Button>
               <Table striped bordered hover responsive>
                 <thead>
                   <tr>

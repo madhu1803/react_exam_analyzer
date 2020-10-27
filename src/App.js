@@ -13,9 +13,11 @@ import {
   MemberUpdate,
   QuestionPaperView,
   MemberList,
+  SubjectCreate,
   SubjectList,
   ExamList,
   Page404,
+  ExamCreate,
 } from "./pages/index";
 import axios from 'axios'
 
@@ -45,8 +47,16 @@ export default class App extends Component {
           <Redirect exact from="/" to="/login" />
           <NonAuthenticatedRoute path="/login" component={Login} />
           <AuthenticatedRoute
+            path="/subject/create"
+            component={SubjectCreate}
+          />
+          <AuthenticatedRoute
             path="/subjects"
             component={SubjectList}
+          />
+           <AuthenticatedRoute
+            path="/exam/create"
+            component={ExamCreate}
           />
            <AuthenticatedRoute
             path="/exams"
