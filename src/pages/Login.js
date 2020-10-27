@@ -3,13 +3,13 @@ import { Button } from "react-bootstrap";
 import { RiBookOpenFill, RiLoginBoxLine } from "react-icons/ri";
 import { Input } from "../components/index";
 import { Navbar } from "react-bootstrap";
-import axios from 'axios'
+import axios from "axios";
 
 export default class Login extends Component {
   state = {
     username: "",
     password: "",
-    errors:{},
+    errors: {},
   };
   handleChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
@@ -22,7 +22,7 @@ export default class Login extends Component {
       url: "https://testing.ajaidanial.wtf/auth/get-auth-token/",
       data: {
         username: this.state.username,
-      password: this.state.password,
+        password: this.state.password,
       },
     })
       .then((response) => {
@@ -40,10 +40,10 @@ export default class Login extends Component {
           this.setState({
             ...this.state,
             errors: {
-             error:error.response.data.non_field_errors 
+              error: error.response.data.non_field_errors,
             },
           });
-          console.log(this.state.errors.error)
+          console.log(this.state.errors.error);
         }
       });
   };
@@ -76,9 +76,28 @@ export default class Login extends Component {
                   <RiLoginBoxLine className="txt-grey" />
                 </h1>
                 <h3 className="txt-blue">Login</h3>
-                <Input type="text" placeholder="ramu@gmail.com" name="username" value={this.state.username} change={(e) => this.handleChange(e)} errors={this.state.errors.error}/>
-                <Input type="password" placeholder="password" name="password" value={this.state.password} change={(e) => this.handleChange(e)} errors={this.state.errors.error}/>
-                <Button className="bg-blue btn-block mt-5" onClick={this.submitHandler}>Login</Button>
+                <Input
+                  type="text"
+                  placeholder="ramu@gmail.com"
+                  name="username"
+                  value={this.state.username}
+                  change={(e) => this.handleChange(e)}
+                  errors={this.state.errors.error}
+                />
+                <Input
+                  type="password"
+                  placeholder="password"
+                  name="password"
+                  value={this.state.password}
+                  change={(e) => this.handleChange(e)}
+                  errors={this.state.errors.error}
+                />
+                <Button
+                  className="bg-blue btn-block mt-5"
+                  onClick={this.submitHandler}
+                >
+                  Login
+                </Button>
               </div>
             </div>
           </div>
