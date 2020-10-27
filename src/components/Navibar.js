@@ -9,11 +9,10 @@ export default class Navibar extends Component {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ml-auto">
-            <Nav.Link href="home">Home</Nav.Link>
-            <Nav.Link href="#home">Subject</Nav.Link>
-            <Nav.Link href="#home">Users</Nav.Link>
-            <Nav.Link href="#home">Home</Nav.Link>
-            <Nav.Link href="#home">Exams</Nav.Link>
+            <Nav.Link href="/">Home</Nav.Link>
+            <Nav.Link href="/subjects">Subject</Nav.Link>
+            <Nav.Link href="/memberlist/view">Users</Nav.Link>
+            <Nav.Link href="/exams">Exams</Nav.Link>
             <Nav.Link href="#home">
               <BiUserCircle style={{ fontSize: "23px" }} />
             </Nav.Link>

@@ -55,7 +55,7 @@ export default class App extends Component {
           <AuthenticatedRoute path="/home" component={Home} />
           <AuthenticatedRoute path="/teacher/update" component={MemberUpdate} />
           <AuthenticatedRoute
-            path="/questionpaper/view"
+            path="/qpaper/view"
             component={QuestionPaperView}
           />
             <AuthenticatedRoute
