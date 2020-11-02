@@ -19,6 +19,7 @@ import {
   Page404,
   ExamCreate,
   QuestionPaperCreate,
+  QuestionCreate,
 } from "./pages/index";
 import axios from "axios";
 
@@ -44,6 +45,10 @@ export default class App extends Component {
           <AuthenticatedRoute
             path="/qpaper/create"
             component={QuestionPaperCreate}
+          />
+          <AuthenticatedRoute
+            path="/question/create"
+            component={QuestionCreate}
           />
           <AuthenticatedRoute path="/members" component={MemberList} />
           <Route component={Page404} />

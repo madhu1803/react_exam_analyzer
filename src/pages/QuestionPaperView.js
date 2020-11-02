@@ -49,7 +49,7 @@ export default class QuestionPaperView extends Component {
         <Navibar />
         <div className="container">
           <Button className="bg-dblue mt-4" href="/qpaper/create">
-            Add New
+            Add New question paper
           </Button>
           {this.state.qpaper.map((qpaper) => (
             <Questioncard {...qpaper} />
@@ -57,6 +57,9 @@ export default class QuestionPaperView extends Component {
           {this.state.questions.map((question) => (
             <Questioncard {...question} />
           ))}
+          <Button className="bg-blue  mt-5" href="/question/create">
+            Add new question
+          </Button>
         </div>
       </div>
     );
