@@ -2,24 +2,20 @@ import React, { Component } from "react";
 import { Navibar, Input } from "../components/index";
 import { Card, Button, Form } from "react-bootstrap";
 import axios from "axios";
-export default class SubjectCreate extends Component {
+
+export default class QuestionPaperCreate extends Component {
   state = {
-    password: "",
-    username: "",
-    first_name: "",
-    last_name: "",
-    email: "",
-    role: "",
-    confirm_password: "",
-    linked_subjects: [],
-    errors: {},
-    subjects: [],
+    name: "",
+    description: "",
+    question_paper: "",
+    question_categories: [],
+    errors: [],
   };
 
   componentDidMount() {
     axios({
       method: "get",
-      url: "https://testing.ajaidanial.wtf/examination/questions/",
+      url: "https://testing.ajaidanial.wtf/examination/question-categories/",
       headers: {
         Authorization: `Token ${localStorage.getItem("auth_key")}`,
       },
@@ -27,7 +23,7 @@ export default class SubjectCreate extends Component {
       .then((response) => {
         this.setState({
           ...this.state,
-          subjects: response.data,
+          question_categories: response.data,
         });
       })
       .catch((error) => {
@@ -48,14 +44,10 @@ export default class SubjectCreate extends Component {
         Authorization: `Token ${localStorage.getItem("auth_key")}`,
       },
       data: {
-        password: this.state.password,
-        username: this.state.username,
-        first_name: this.state.first_name,
-        last_name: this.state.last_name,
-        email: this.state.email,
-        role: this.state.rolw,
-        confirm_password: this.state.confirm_password,
-        linked_subjects: this.state.linked_subjects,
+        name: this.state.name,
+        description: this.state.description,
+        question_paper: this.state.question_paper,
+        question_categories: this.state.question_categories,
       },
     })
       .then((response) => {
@@ -78,17 +70,17 @@ export default class SubjectCreate extends Component {
 
               <Input
                 type="text"
-                name="username"
-                placeholder="username"
-                value={this.state.username}
+                name="name"
+                placeholder="question name"
+                value={this.state.name}
                 change={(e) => this.handleChange(e)}
                 errors={this.state.errors.error}
               />
               <Input
                 type="text"
-                name="first_name"
-                placeholder="first_name"
-                value={this.state.first_name}
+                name="description"
+                placeholder="question description"
+                value={this.state.description}
                 change={(e) => this.handleChange(e)}
                 errors={this.state.errors.error}
               />
@@ -102,33 +94,9 @@ export default class SubjectCreate extends Component {
               />
               <Input
                 type="text"
-                name="email"
-                placeholder="email"
-                value={this.state.email}
-                change={(e) => this.handleChange(e)}
-                errors={this.state.errors.error}
-              />
-              <Input
-                type="text"
-                name="role"
-                placeholder="admin/teacher"
-                value={this.state.role}
-                change={(e) => this.handleChange(e)}
-                errors={this.state.errors.error}
-              />
-              <Input
-                type="text"
-                name="password"
-                placeholder="password"
-                value={this.state.password}
-                change={(e) => this.handleChange(e)}
-                errors={this.state.errors.error}
-              />
-              <Input
-                type="text"
-                name="confirm_password"
-                placeholder="confirm_password"
-                value={this.state.confirm_password}
+                name="question_paper"
+                placeholder="question paper"
+                value={this.state.question_paper}
                 change={(e) => this.handleChange(e)}
                 errors={this.state.errors.error}
               />
@@ -139,8 +107,10 @@ export default class SubjectCreate extends Component {
                 className="mt-4"
                 name="linked_subjects"
               >
-                {this.state.subjects.map((subject) => (
-                  <option value={subject.name}>{subject.name}</option>
+                {this.state.question_categories.map((question_categorie) => (
+                  <option value={question_categorie.name}>
+                    {question_categorie.name}
+                  </option>
                 ))}
               </Form.Control>
             </Card.Body>

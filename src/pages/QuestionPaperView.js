@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Navibar, Questioncard } from "../components/index";
 import axios from "axios";
+import { Button } from "react-bootstrap";
 export default class QuestionPaperView extends Component {
   state = {
     qpaper: [],
@@ -19,7 +20,7 @@ export default class QuestionPaperView extends Component {
           ...this.state,
           qpaper: response.data,
         });
-        console.log(response);
+        console.log(response.data);
 
         console.log(this.state.qpaper);
       })
@@ -32,6 +33,9 @@ export default class QuestionPaperView extends Component {
       <div>
         <Navibar />
         <div className="container">
+          <Button className="bg-dblue mt-4" href="/qpaper/create">
+            Add New
+          </Button>
           {this.state.qpaper.map((qpaper) => (
             <Questioncard {...qpaper} />
           ))}

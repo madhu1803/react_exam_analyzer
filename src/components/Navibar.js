@@ -11,9 +11,10 @@ export default class Navibar extends Component {
           <Nav className="ml-auto">
             <Nav.Link href="/">Home</Nav.Link>
             <Nav.Link href="/subjects">Subject</Nav.Link>
-            <Nav.Link href="/memberlist/view">Users</Nav.Link>
+            <Nav.Link href="/members">Users</Nav.Link>
             <Nav.Link href="/exams">Exams</Nav.Link>
-            <Nav.Link href="#home">
+            <Nav.Link href="/qpapers">Question papers</Nav.Link>
+            <Nav.Link>
               <BiUserCircle style={{ fontSize: "23px" }} />
             </Nav.Link>
           </Nav>
