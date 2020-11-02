@@ -5,6 +5,7 @@ import { Button } from "react-bootstrap";
 export default class QuestionPaperView extends Component {
   state = {
     qpaper: [],
+    questions: [],
   };
   componentDidMount() {
     axios({
@@ -20,9 +21,23 @@ export default class QuestionPaperView extends Component {
           ...this.state,
           qpaper: response.data,
         });
-        console.log(response.data);
+      })
+      .catch((error) => {
+        console.log(error.response);
+      });
 
-        console.log(this.state.qpaper);
+    axios({
+      method: "get",
+      url: "https://testing.ajaidanial.wtf/examination/questions/",
+      headers: {
+        Authorization: `Token ${localStorage.getItem("auth_key")}`,
+      },
+    })
+      .then((response) => {
+        this.setState({
+          ...this.state,
+          questions: response.data,
+        });
       })
       .catch((error) => {
         console.log(error.response);
@@ -38,6 +53,9 @@ export default class QuestionPaperView extends Component {
           </Button>
           {this.state.qpaper.map((qpaper) => (
             <Questioncard {...qpaper} />
+          ))}
+          {this.state.questions.map((question) => (
+            <Questioncard {...question} />
           ))}
         </div>
       </div>
