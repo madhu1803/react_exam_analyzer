@@ -14,6 +14,7 @@ export default class SubjectCreate extends Component {
     linked_subjects: [],
     errors: {},
     subjects: [],
+    selected_subjects: [],
   };
 
   componentDidMount() {
@@ -132,6 +133,8 @@ export default class SubjectCreate extends Component {
                 change={(e) => this.handleChange(e)}
                 errors={this.state.errors.error}
               />
+              <small>subject name</small>
+
               <Form.Control
                 as="select"
                 size="sm"
@@ -140,7 +143,7 @@ export default class SubjectCreate extends Component {
                 name="linked_subjects"
               >
                 {this.state.subjects.map((subject) => (
-                  <option value={subject.name}>{subject.name}</option>
+                  <option value={subject.id}>{subject.name}</option>
                 ))}
               </Form.Control>
             </Card.Body>

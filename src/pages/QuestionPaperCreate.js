@@ -7,15 +7,17 @@ export default class QuestionPaperCreate extends Component {
   state = {
     name: "",
     description: "",
-    question_paper: "",
-    question_categories: [],
+    selected_exam: [],
+    selected_subject: [],
+    exams: [],
+    subjects: [],
     errors: [],
   };
 
   componentDidMount() {
     axios({
       method: "get",
-      url: "https://testing.ajaidanial.wtf/examination/question-categories/",
+      url: "https://testing.ajaidanial.wtf/examination/exams/",
       headers: {
         Authorization: `Token ${localStorage.getItem("auth_key")}`,
       },
@@ -23,7 +25,23 @@ export default class QuestionPaperCreate extends Component {
       .then((response) => {
         this.setState({
           ...this.state,
-          question_categories: response.data,
+          exams: response.data,
+        });
+      })
+      .catch((error) => {
+        console.log(error.response);
+      });
+    axios({
+      method: "get",
+      url: "https://testing.ajaidanial.wtf/examination/subjects/",
+      headers: {
+        Authorization: `Token ${localStorage.getItem("auth_key")}`,
+      },
+    })
+      .then((response) => {
+        this.setState({
+          ...this.state,
+          subjects: response.data,
         });
       })
       .catch((error) => {
@@ -39,15 +57,16 @@ export default class QuestionPaperCreate extends Component {
     alert("Submitted");
     axios({
       method: "post",
-      url: "https://testing.ajaidanial.wtf/auth/users/",
+      url:
+        "https://testing.ajaidanial.wtf/examination/question-papers/?show-questions=true",
       headers: {
         Authorization: `Token ${localStorage.getItem("auth_key")}`,
       },
       data: {
         name: this.state.name,
         description: this.state.description,
-        question_paper: this.state.question_paper,
-        question_categories: this.state.question_categories,
+        selected_exam: this.state.selected_exam,
+        selected_subject: this.state.selected_subject,
       },
     })
       .then((response) => {
@@ -55,6 +74,7 @@ export default class QuestionPaperCreate extends Component {
         console.log(this.state.name);
       })
       .catch((error) => {
+        alert("error");
         console.log(error.response);
       });
   };
@@ -67,11 +87,10 @@ export default class QuestionPaperCreate extends Component {
           <Card className="shadow-lg p-3 mb-5 bg-white rounded">
             <Card.Body>
               <h4>Enter details to update/Create</h4>
-
               <Input
                 type="text"
                 name="name"
-                placeholder="question name"
+                placeholder="question paper name"
                 value={this.state.name}
                 change={(e) => this.handleChange(e)}
                 errors={this.state.errors.error}
@@ -79,38 +98,35 @@ export default class QuestionPaperCreate extends Component {
               <Input
                 type="text"
                 name="description"
-                placeholder="question description"
+                placeholder="question name description"
                 value={this.state.description}
                 change={(e) => this.handleChange(e)}
                 errors={this.state.errors.error}
               />
-              <Input
-                type="text"
-                name="last_name"
-                placeholder="last_name"
-                value={this.state.last_name}
-                change={(e) => this.handleChange(e)}
-                errors={this.state.errors.error}
-              />
-              <Input
-                type="text"
-                name="question_paper"
-                placeholder="question paper"
-                value={this.state.question_paper}
-                change={(e) => this.handleChange(e)}
-                errors={this.state.errors.error}
-              />
+
+              <small>Subject name</small>
               <Form.Control
                 as="select"
                 size="sm"
                 custom
                 className="mt-4"
-                name="linked_subjects"
+                name="selected_subject"
               >
-                {this.state.question_categories.map((question_categorie) => (
-                  <option value={question_categorie.name}>
-                    {question_categorie.name}
-                  </option>
+                {" "}
+                {this.state.subjects.map((subject) => (
+                  <option value={subject.id}>{subject.name}</option>
+                ))}
+              </Form.Control>
+              <small>exam name</small>
+              <Form.Control
+                as="select"
+                size="sm"
+                custom
+                className="mt-4"
+                name="selected_exam"
+              >
+                {this.state.exams.map((exam) => (
+                  <option value={exam.id}>{exam.name}</option>
                 ))}
               </Form.Control>
             </Card.Body>
