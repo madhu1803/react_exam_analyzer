@@ -11,16 +11,15 @@ export default class SubjectCreate extends Component {
     email: "",
     role: "",
     confirm_password: "",
-    linked_subjects: [],
-    errors: {},
     subjects: [],
+    errors: {},
     selected_subjects: [],
   };
 
   componentDidMount() {
     axios({
       method: "get",
-      url: "https://testing.ajaidanial.wtf/examination/questions/",
+      url: "https://testing.ajaidanial.wtf/examination/subjects/",
       headers: {
         Authorization: `Token ${localStorage.getItem("auth_key")}`,
       },
@@ -54,9 +53,9 @@ export default class SubjectCreate extends Component {
         first_name: this.state.first_name,
         last_name: this.state.last_name,
         email: this.state.email,
-        role: this.state.rolw,
+        role: this.state.role,
         confirm_password: this.state.confirm_password,
-        linked_subjects: this.state.linked_subjects,
+        linked_subjects: this.state.selected_subjects,
       },
     })
       .then((response) => {
@@ -140,7 +139,9 @@ export default class SubjectCreate extends Component {
                 size="sm"
                 custom
                 className="mt-4"
-                name="linked_subjects"
+                onChange={(e) => this.handleChange(e)}
+                name="selected_subjects"
+                // defaultValue={this.state.selected_subjects}
               >
                 {this.state.subjects.map((subject) => (
                   <option value={subject.id}>{subject.name}</option>

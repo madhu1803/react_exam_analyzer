@@ -124,6 +124,7 @@ export default class QuestionPaperCreate extends Component {
                 custom
                 className="mt-4"
                 name="selected_exam"
+                onChange={(e) => this.handleChange(e)}
               >
                 {this.state.exams.map((exam) => (
                   <option value={exam.id}>{exam.name}</option>
