@@ -1,48 +1,39 @@
-import React, { Component } from "react";
-import { Navibar } from "../components/index";
-import axios from "axios";
-import { Table, Button } from "react-bootstrap";
-import { IoIosPersonAdd } from "react-icons/io";
-export default class MemberList extends Component {
+import React, { Component } from 'react'
+import { Table, Button } from 'react-bootstrap'
+import { IoIosPersonAdd } from 'react-icons/io'
+import { triggerSimpleAjax } from '../helpers/httpHelper'
+
+export default class MembersList extends Component {
   state = {
-    members: [],
-  };
+    members: []
+  }
 
   componentDidMount() {
-    axios({
-      method: "get",
-      url: "https://testing.ajaidanial.wtf/auth/users/",
-      headers: {
-        Authorization: `Token ${localStorage.getItem("auth_key")}`,
-      },
-    })
-      .then((response) => {
-        this.setState({
-          ...this.state,
-          members: response.data,
-        });
-        console.log(this.state.members);
+    triggerSimpleAjax('auth/users/', 'get').then((response) => {
+      this.setState({
+        ...this.state,
+        members: response
       })
-      .catch((error) => {
-        console.log(error.response);
-      });
+    })
   }
+
   render() {
     return (
-      <div>
-        <Navibar />
+      <div className="page-container">
         <div className="container mt-5">
-          <Button className="bg-dblue mb-4" href="/member/create">
+          <Button className="bg-dblue mb-4" href="/members/create">
             <IoIosPersonAdd /> Add New
           </Button>
+
           <Table striped bordered hover responsive>
             <thead>
               <tr>
-                <th>#</th>
+                <th>#ID</th>
                 <th>Email</th>
                 <th>First Name</th>
                 <th>Last Name</th>
                 <th>Username</th>
+                <th>Role</th>
               </tr>
             </thead>
             <tbody>
@@ -53,12 +44,13 @@ export default class MemberList extends Component {
                   <td>{member.first_name}</td>
                   <td>{member.last_name}</td>
                   <td>{member.username}</td>
+                  <td>{member.role}</td>
                 </tr>
               ))}
             </tbody>
           </Table>
         </div>
       </div>
-    );
+    )
   }
 }
