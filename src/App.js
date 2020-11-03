@@ -1,59 +1,72 @@
-import React, { Component } from "react";
-import "./App.css";
+import React, { Component } from 'react'
+import './App.css'
 import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Redirect,
-} from "react-router-dom";
-import { AuthenticatedRoute, NonAuthenticatedRoute } from "./helpers/Routes";
+  Redirect
+} from 'react-router-dom'
+import { AuthenticatedRoute, NonAuthenticatedRoute } from './helpers/routes'
 import {
   Home,
   Login,
-  QuestionPaperView,
-  MemberList,
-  MemberCreate,
-  SubjectCreate,
-  SubjectList,
-  ExamList,
   Page404,
-  ExamCreate,
-  QuestionPaperCreate,
-  QuestionCreate,
-} from "./pages/index";
-import axios from "axios";
+  SubjectList,
+  SubjectsCreate,
+  ExamsList,
+  ExamsCreate,
+  MembersList,
+  MembersCreate
+  // QuestionPaperView,
+  // QuestionPaperCreate,
+  // QuestionCreate
+} from './pages/index'
+import { Navibar } from './components'
 
 export default class App extends Component {
   render() {
     return (
       <Router>
-        {/* A <Switch> looks through its children <Route>s and
-            renders the first one that matches the current URL. */}
+        {localStorage.getItem('auth_key', null) && <Navibar />}
         <Switch>
           <Redirect exact from="/" to="/login" />
-          <NonAuthenticatedRoute path="/login" component={Login} />
+          <NonAuthenticatedRoute exact path="/login" component={Login} />
+          <AuthenticatedRoute exact path="/home" component={Home} />
+          {/* subjects */}
+          <AuthenticatedRoute exact path="/subjects" component={SubjectList} />
           <AuthenticatedRoute
-            path="/subject/create"
-            component={SubjectCreate}
+            exact
+            path="/subjects/create"
+            component={SubjectsCreate}
           />
-          <AuthenticatedRoute path="/subjects" component={SubjectList} />
-          <AuthenticatedRoute path="/exam/create" component={ExamCreate} />
-          <AuthenticatedRoute path="/exams" component={ExamList} />
-          <AuthenticatedRoute path="/home" component={Home} />
-          <AuthenticatedRoute path="/member/create" component={MemberCreate} />
-          <AuthenticatedRoute path="/qpapers" component={QuestionPaperView} />
+          {/* exams */}
+          <AuthenticatedRoute exact path="/exams" component={ExamsList} />
           <AuthenticatedRoute
+            exact
+            path="/exams/create"
+            component={ExamsCreate}
+          />
+          <AuthenticatedRoute exact path="/members" component={MembersList} />
+          <AuthenticatedRoute
+            exact
+            path="/members/create"
+            component={MembersCreate}
+          />
+
+          {/* 
+          <AuthenticatedRoute path="/members/create" component={MembersCreate} /> 
+          <AuthenticatedRoute path="/qpapers" component={QuestionPaperView} /> */}
+          {/* <AuthenticatedRoute
             path="/qpaper/create"
             component={QuestionPaperCreate}
-          />
-          <AuthenticatedRoute
+          /> */}
+          {/* <AuthenticatedRoute
             path="/question/create"
             component={QuestionCreate}
-          />
-          <AuthenticatedRoute path="/members" component={MemberList} />
+          /> */}
           <Route component={Page404} />
         </Switch>
       </Router>
-    );
+    )
   }
 }
