@@ -1,44 +1,35 @@
-import React, { Component } from "react";
-import { Table, Button } from "react-bootstrap";
-import { Navibar } from "../components/index";
-import { AiFillFileAdd } from "react-icons/ai";
-import axios from "axios";
+import React, { Component } from 'react'
+import { Table, Button } from 'react-bootstrap'
+import { AiFillFileAdd } from 'react-icons/ai'
+import axios from 'axios'
+import { triggerSimpleAjax } from '../helpers/httpHelper'
 
 export default class SubjectList extends Component {
   state = {
-    subjects: [],
-  };
-  componentDidMount() {
-    axios({
-      method: "get",
-      url: "https://testing.ajaidanial.wtf/examination/subjects/",
-      headers: {
-        Authorization: `Token ${localStorage.getItem("auth_key")}`,
-      },
-    })
-      .then((response) => {
-        this.setState({
-          ...this.state,
-          subjects: response.data,
-        });
-      })
-      .catch((error) => {
-        console.log(error.response);
-      });
+    subjects: []
   }
+
+  componentDidMount() {
+    triggerSimpleAjax('examination/subjects/', 'get').then((response) => {
+      this.setState({
+        ...this.state,
+        subjects: response
+      })
+    })
+  }
+
   render() {
     return (
-      <div>
-        <Navibar />
+      <div className="page-container">
         <div className="container mt-5">
-          <Button className="bg-dblue mb-4" href="/subject/create">
+          <Button className="bg-dblue mb-4" href="#">
             <AiFillFileAdd /> Add New
           </Button>
 
           <Table striped bordered hover responsive>
             <thead>
               <tr>
-                <th>#</th>
+                <th>#ID</th>
                 <th>Name</th>
               </tr>
             </thead>
@@ -53,6 +44,6 @@ export default class SubjectList extends Component {
           </Table>
         </div>
       </div>
-    );
+    )
   }
 }
