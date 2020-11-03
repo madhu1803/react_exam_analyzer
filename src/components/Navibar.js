@@ -13,9 +13,13 @@ export default class Navibar extends Component {
             <Nav.Link href="/subjects">Subject</Nav.Link>
             <Nav.Link href="/exams">Exams</Nav.Link>
             <Nav.Link href="/members">Users</Nav.Link>
-            <Nav.Link href="/qpapers">Question papers</Nav.Link>
-            <Nav.Link>
-              <BiUserCircle style={{ fontSize: '23px' }} />
+            <Nav.Link
+              onClick={(e) => {
+                localStorage.removeItem('auth_key')
+                window.location.reload()
+              }}
+            >
+              Logout
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>

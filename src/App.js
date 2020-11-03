@@ -17,9 +17,6 @@ import {
   ExamsCreate,
   MembersList,
   MembersCreate
-  // QuestionPaperView,
-  // QuestionPaperCreate,
-  // QuestionCreate
 } from './pages/index'
 import { Navibar } from './components'
 
@@ -52,18 +49,6 @@ export default class App extends Component {
             path="/members/create"
             component={MembersCreate}
           />
-
-          {/* 
-          <AuthenticatedRoute path="/members/create" component={MembersCreate} /> 
-          <AuthenticatedRoute path="/qpapers" component={QuestionPaperView} /> */}
-          {/* <AuthenticatedRoute
-            path="/qpaper/create"
-            component={QuestionPaperCreate}
-          /> */}
-          {/* <AuthenticatedRoute
-            path="/question/create"
-            component={QuestionCreate}
-          /> */}
           <Route component={Page404} />
         </Switch>
       </Router>
