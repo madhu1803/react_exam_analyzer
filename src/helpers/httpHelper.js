@@ -9,15 +9,17 @@ export function triggerSimpleAjax(
     'Content-Type': 'application/json'
   }
 ) {
+  // append auth header only if it is present
+  if (localStorage.getItem('auth_key', null)) {
+    headers['Authorization'] = `Token ${localStorage.getItem('auth_key', null)}`
+  }
+
   return new Promise((resolve, reject) => {
     axios({
       method: method,
       url: endpoint,
       baseURL: 'https://testing.ajaidanial.wtf/',
-      headers: {
-        Authorization: `Token ${localStorage.getItem('auth_key', null)}`, // auth header mandatory
-        ...headers
-      },
+      headers: headers,
       params: params,
       data: data,
       withCredentials: true

@@ -1,54 +1,46 @@
-import React, { Component } from "react";
-import { Button } from "react-bootstrap";
-import { RiBookOpenFill, RiLoginBoxLine } from "react-icons/ri";
-import { Input } from "../components/index";
-import { Navbar } from "react-bootstrap";
-import axios from "axios";
+import React, { Component } from 'react'
+import { Button } from 'react-bootstrap'
+import { RiBookOpenFill, RiLoginBoxLine } from 'react-icons/ri'
+import { Input } from '../components/index'
+import { Navbar } from 'react-bootstrap'
+import axios from 'axios'
+import { triggerSimpleAjax } from '../helpers/httpHelper'
 
 export default class Login extends Component {
   state = {
-    username: "",
-    password: "",
-    errors: {},
-  };
+    inputData: {},
+    errors: {}
+  }
+
   handleChange = (e) => {
-    this.setState({ [e.target.name]: e.target.value });
-  };
+    this.setState({
+      ...this.state,
+      inputData: {
+        ...this.state.inputData,
+        [e.target.name]: e.target.value
+      }
+    })
+  }
 
   submitHandler = () => {
-    alert("Submitted");
-    axios({
-      method: "post",
-      url: "https://testing.ajaidanial.wtf/auth/get-auth-token/",
-      data: {
-        username: this.state.username,
-        password: this.state.password,
-      },
-    })
+    triggerSimpleAjax('auth/get-auth-token/', 'post', this.state.inputData)
       .then((response) => {
-        if (response.status === 200) {
-          alert("success");
-          localStorage.setItem("auth_key", response.data.token);
-          window.location.reload();
-        } else {
-          alert("unhandled");
-        }
+        localStorage.setItem('auth_key', response.token)
+        localStorage.setItem('user_data', JSON.stringify(response.user_data))
+        alert('Successfully signed in user.')
+        window.location.reload()
       })
-      .catch((error) => {
-        if (error.response.status === 400 || error.response.status === 403) {
-          alert("error");
-          this.setState({
-            ...this.state,
-            errors: {
-              error: error.response.data.non_field_errors,
-            },
-          });
-          console.log(this.state.errors.error);
-        }
-      });
-  };
+      .catch((errorResponse) => {
+        this.setState({
+          ...this.state,
+          errors: errorResponse
+        })
+      })
+  }
 
   render() {
+    let { inputData, errors } = this.state
+
     return (
       <div className="login-container text-capitalise">
         {/* navbar  */}
@@ -80,17 +72,19 @@ export default class Login extends Component {
                   type="text"
                   placeholder="ramu@gmail.com"
                   name="username"
-                  value={this.state.username}
-                  change={(e) => this.handleChange(e)}
-                  errors={this.state.errors.error}
+                  value={inputData.username}
+                  change={this.handleChange}
+                  errors={
+                    errors.username || errors.non_field_errors || errors.detail
+                  }
                 />
                 <Input
                   type="password"
                   placeholder="password"
                   name="password"
-                  value={this.state.password}
-                  change={(e) => this.handleChange(e)}
-                  errors={this.state.errors.error}
+                  value={inputData.password}
+                  change={this.handleChange}
+                  errors={errors.password}
                 />
                 <Button
                   className="bg-blue btn-block mt-5"
@@ -103,6 +97,6 @@ export default class Login extends Component {
           </div>
         </div>
       </div>
-    );
+    )
   }
 }
