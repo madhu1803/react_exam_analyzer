@@ -22,7 +22,7 @@ export default class SubjectList extends Component {
     return (
       <div className="page-container">
         <div className="container mt-5">
-          <Button className="bg-dblue mb-4" href="#">
+          <Button className="bg-dblue mb-4" href="/subjects/create">
             <AiFillFileAdd /> Add New
           </Button>
 
