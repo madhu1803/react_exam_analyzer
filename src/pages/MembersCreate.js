@@ -23,6 +23,25 @@ export default class SubjectsCreate extends Component {
     }
   }
 
+  componentDidMount() {
+    triggerSimpleAjax('examination/subjects/', 'get').then((response) => {
+      let subjectsOptions = []
+      response.map((data, index) => {
+        subjectsOptions.push({
+          value: data.id,
+          label: data.name
+        })
+      })
+      this.setState({
+        ...this.state,
+        options: {
+          ...this.state.options,
+          subjects: subjectsOptions
+        }
+      })
+    })
+  }
+
   handleChange = (e, customName = null) => {
     let value = null
     if (e !== null && 'target' in e) {
@@ -56,25 +75,6 @@ export default class SubjectsCreate extends Component {
         console.log(value)
       }
     )
-  }
-
-  componentDidMount() {
-    axios({
-      method: 'get',
-      url: 'https://testing.ajaidanial.wtf/examination/subjects/',
-      headers: {
-        Authorization: `Token ${localStorage.getItem('auth_key')}`
-      }
-    })
-      .then((response) => {
-        this.setState({
-          ...this.state,
-          subjects: response.data
-        })
-      })
-      .catch((error) => {
-        console.log(error.response)
-      })
   }
 
   submitHandler = () => {
@@ -142,6 +142,14 @@ export default class SubjectsCreate extends Component {
                 errors={errors.role}
                 options={options.roles}
                 multiple={false}
+              />
+              <AppSelect
+                name="linked_subjects"
+                value={inputData.linked_subjects}
+                change={(e) => this.handleChange(e, 'linked_subjects')}
+                errors={errors.linked_subjects}
+                options={options.subjects}
+                multiple={true}
               />
               <Input
                 type="password"
